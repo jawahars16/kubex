@@ -1,0 +1,49 @@
+package watcher
+
+import (
+	"sync"
+
+	"github.com/jawahars16/kube-monitor/infra"
+	"github.com/jawahars16/kube-monitor/kube"
+	v1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
+
+func mapService(service *v1.Service, action string) Payload {
+
+	ingress := service.Status.LoadBalancer.Ingress
+	ip := ""
+	if len(ingress) > 0 {
+		ip = service.Status.LoadBalancer.Ingress[0].IP
+	}
+	meta := Meta{
+		ID:        string(service.UID),
+		Name:      service.Name,
+		Namespace: service.Namespace,
+		Labels:    service.Labels,
+		Created:   service.CreationTimestamp,
+	}
+	resource := Service{
+		Meta:     meta,
+		IP:       ip,
+		Selector: service.Spec.Selector,
+	}
+	return Payload{
+		Action:   action,
+		Resource: resource,
+	}
+}
+
+// WatchServices ...
+func WatchServices(socket infra.Socket, mutex *sync.Mutex) {
+	channel := kube.GetServiceChannel(metav1.ListOptions{}, "") // TODO: Get namespace from user
+
+	for event := range channel {
+		if service, ok := event.Object.(*v1.Service); ok {
+			// Critical Section : Multiple goroutines may write to socket at same time.
+			mutex.Lock()
+			socket.Write(mapService(service, "SVC_"+string(event.Type)))
+			mutex.Unlock()
+		}
+	}
+}
