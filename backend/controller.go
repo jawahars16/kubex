@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/jawahars16/kube-monitor/watcher"
+	"github.com/jawahars16/kubex/watcher"
 )
 
 // ServiceHandler ...

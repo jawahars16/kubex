@@ -37,17 +37,18 @@ class LinearMeter extends Component {
       animationDuration: 1500,
       animationRule: "linear",
       animationTarget: "plate",
-      barWidth: 5,
+      barWidth: 2,
       ticksWidth: 60,
       highlightsWidth: 60,
       colorNumbers: 'white, red',
+      title: 'CPU',
       fontNumbersSize: 1,
       ticksWidthMinor: 0,
       animateOnInit: true,
       highlights: this.props.sections,
       value: this.props.value,
       fontTitleSize: 1,
-      colorBarProgress: this.props.value < 0.6 ? materialColors.green : materialColors.red
+      colorBarProgress: this.props.value < 0.6 ? materialColors.green : materialColors.orange
     })
     this.gauge = new LinearGauge(options).draw();
   }
@@ -57,6 +58,7 @@ class LinearMeter extends Component {
       this.gauge.update({
         highlights: this.props.sections,
         value: this.props.value,
+        colorBarProgress: this.props.value < 0.6 ? materialColors.green : materialColors.orange
       });
     }
     return (
@@ -64,7 +66,6 @@ class LinearMeter extends Component {
         <canvas style={{ marginTop: 0 }} ref={(canvas) => {
           this.el = canvas
         }} />
-        <div style={{ marginLeft: 70 }}>{this.props.title}</div>
       </div>
     );
   }

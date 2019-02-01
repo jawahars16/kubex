@@ -14,8 +14,8 @@ type Meta struct {
 }
 
 type Resources struct {
-	CPU    float64 `json:"cpu,omitempty"`
-	Memory float64 `json:"memory,omitempty"`
+	CPU    float64 `json:"cpu"`
+	Memory float64 `json:"memory"`
 }
 
 type Payload struct {
@@ -46,13 +46,14 @@ type Pod struct {
 
 type Node struct {
 	Name    string  `json:"name,omitempty"`
-	CPU     float64 `json:"cpu,omitempty"`
-	Memory  float64 `json:"memory,omitempty"`
-	Storage float64 `json:"storage,omitempty"`
+	CPU     float64 `json:"cpu"`
+	Memory  float64 `json:"memory"`
+	ReadyStatus bool `json:"readyStatus"`
 }
 
 type PodMetrics struct {
 	Pod    string  `json:"pod,omitempty"`
-	CPU    float64 `json:"cpu,omitempty"`
-	Memory float64 `json:"memory,omitempty"`
+	CPU    float64 `json:"cpu"`
+	Memory float64 `json:"memory"`
+	Error  string  `json:"error,omitempty"`
 }

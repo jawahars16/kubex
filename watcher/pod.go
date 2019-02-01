@@ -4,8 +4,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/jawahars16/kube-monitor/infra"
-	"github.com/jawahars16/kube-monitor/kube"
+	"github.com/jawahars16/kubex/infra"
+	"github.com/jawahars16/kubex/kube"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -87,7 +87,20 @@ func WatchPodMetrics(socket infra.Socket, mutex *sync.Mutex) {
 
 func writePodMetrics(socket infra.Socket, mutex *sync.Mutex) {
 
-	list := kube.GetPodMetrics()
+	list, err := kube.GetPodMetrics()
+
+	if err != nil {
+		payload := Payload{
+			Action: "METRICS_ERROR",
+			Resource: PodMetrics{
+				Error: err.Error(),
+			},
+		}
+		mutex.Lock()
+		socket.Write(payload)
+		mutex.Unlock()
+	}
+
 	for _, pod := range list {
 		cpuUsage := 0.0
 		memoryUsage := 0.0

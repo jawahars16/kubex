@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/jawahars16/kube-monitor/metrics"
+	"github.com/jawahars16/kubex/metrics"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/metrics/pkg/apis/metrics/v1beta1"
@@ -18,7 +18,7 @@ func InitializeMetricsClient() {
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err.Error())
 	}
 
 	metricsClient, _ = metrics.NewForConfig(config)
@@ -46,13 +46,29 @@ func InitializeMetricsClient() {
 	// }
 }
 
+type errorString struct {
+	s string
+}
+
+func (e *errorString) Error() string {
+	return e.s
+}
+
+func MetricsError() error {
+	return &errorString{"Metrics Server not available in the cluster."}
+}
+
 // GetPodMetrics ...
-func GetPodMetrics() []v1beta1.PodMetrics {
-	m, err := metricsClient.MetricsV1beta1().PodMetricses("").List(metav1.ListOptions{})
-	if err != nil {
-		log.Println("GetPodMetricsChannel")
-		log.Fatal(err)
+func GetPodMetrics() ([]v1beta1.PodMetrics, error) {
+
+	if metricsClient == nil {
+		return nil, MetricsError()
 	}
 
-	return m.Items
+	m, err := metricsClient.MetricsV1beta1().PodMetricses("").List(metav1.ListOptions{})
+	if err != nil {
+		return nil, MetricsError()
+	}
+
+	return m.Items, nil
 }

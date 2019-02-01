@@ -3,10 +3,10 @@ package watcher
 import (
 	"sync"
 
-	"github.com/jawahars16/kube-monitor/kube"
+	"github.com/jawahars16/kubex/kube"
 	v1 "k8s.io/api/core/v1"
 
-	"github.com/jawahars16/kube-monitor/infra"
+	"github.com/jawahars16/kubex/infra"
 )
 
 func mapEvent(event *v1.Event) Payload {

@@ -23,6 +23,9 @@ export const getResourceSectionsAndUsage = resource => {
   let resourceRequest = getRequest(resource);
   let resourceLimit = getLimit(resource);
   let usage = getUsage(resource);
+
+  resourceLimit = resourceLimit <= 0 && resourceRequest <= 0 ? 1 : resourceLimit;
+
   let sections = [
     { from: 0, to: resourceRequest, color: materialColors.green },
     { from: resourceRequest, to: resourceLimit, color: materialColors.orange },

@@ -1,20 +1,23 @@
 @import '~antd/dist/antd.css';
 
 .circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
-  -moz-border-radius: 40px;
-  -webkit-border-radius: 40px;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
   text-align: center;
-  line-height: 40px;
+  line-height: 30px;
   color: #ffffff;
 }
+
+
 
 .inner-shadow {
   -moz-box-shadow:    inset 0 0 10px #00000056;
   -webkit-box-shadow: inset 0 0 10px #00000056;
   box-shadow:         inset 0 0 10px #00000056;
+  box-shadow:         inset 0 0 10px #ffffff5e;
 }
 
 .arrow-shadow {

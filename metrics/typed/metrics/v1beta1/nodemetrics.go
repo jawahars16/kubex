@@ -21,7 +21,7 @@ package v1beta1
 import (
 	"time"
 
-	scheme "github.com/jawahars16/kube-monitor/metrics/scheme"
+	scheme "github.com/jawahars16/kubex/metrics/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	watch "k8s.io/apimachinery/pkg/watch"
 	rest "k8s.io/client-go/rest"

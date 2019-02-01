@@ -18,11 +18,8 @@ const mapStateToProps = (state, ownProps) => {
       capacity: node.memory,
       usage: getSumResources(currentPods, p => p.usage.memory)
     },
-    storage: {
-      request: getSumResources(currentPods, p => p.request.storage),
-      capacity: node.storage,
-      usage: getSumResources(currentPods, p => p.usage.storage)
-    }
+    name: ownProps.name,
+    readyStatus: node.readyStatus
   }
 }
 

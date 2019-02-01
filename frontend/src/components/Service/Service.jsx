@@ -30,26 +30,28 @@ class Service extends Component {
               }}>{name}</div>
             </Row>
             <Row>
-              <Divider style={{ marginTop: 0 }}>{runningPods} out of {totalPods} pods running</Divider>
+              {/* <Divider style={{ marginTop: 0 }}>{runningPods} out of {totalPods} pods running</Divider> */}
+              <Divider>
+                <ServicePods data={pods} />
+              </Divider>
             </Row>
             <Row style={{ marginTop: 10 }}>
               <Col span={12}>
                 <Meter
                   sections={cpuDetail.sections}
                   value={cpuDetail.usage}
-                  displayValue={`${Math.round(cpuDetail.usage * 100)}%`}
                   title='CPU' />
               </Col>
               <Col span={12}>
                 <Meter
                   sections={memoryDetail.sections}
                   value={memoryDetail.usage}
-                  displayValue={`${Math.round(memoryDetail.usage * 100)}%`}
                   title='Memory' />
               </Col>
             </Row>
-            <Row>
-              <ServicePods data={pods} style={{ marginTop: -40, marginLeft: 20, marginRight: 20, marginBottom: 30 }} />
+            <Row style={{ top: -80, left: -10 }}>
+              <Col span={12} style={{ textAlign: 'center', fontSize: 18 }}>{`${Math.round(cpuDetail.usage * 100)}%`}</Col>
+              <Col span={12} style={{ textAlign: 'center', fontSize: 18 }}>{`${Math.round(memoryDetail.usage * 100)}%`}</Col>
             </Row>
           </div>
         </Col>

@@ -40,8 +40,8 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        {/* <Services /> */}
-        <Nodes />
+        <Services />
+        {/* <Nodes /> */}
       </Provider>
     );
   }

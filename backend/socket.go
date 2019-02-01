@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
-	"github.com/jawahars16/kube-monitor/infra"
+	"github.com/jawahars16/kubex/infra"
 )
 
 var upgrader = websocket.Upgrader{

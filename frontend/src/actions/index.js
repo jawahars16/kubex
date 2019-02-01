@@ -9,7 +9,7 @@ const onMessage = (dispatch, e) => {
   const resource = obj.resource;
 
   // if (resource.meta && resource.meta.name === 'kubernetes') return;
-
+  console.log(resource);
   dispatch({
     type: obj.action,
     payload: resource

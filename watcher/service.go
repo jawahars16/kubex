@@ -3,8 +3,8 @@ package watcher
 import (
 	"sync"
 
-	"github.com/jawahars16/kube-monitor/infra"
-	"github.com/jawahars16/kube-monitor/kube"
+	"github.com/jawahars16/kubex/infra"
+	"github.com/jawahars16/kubex/kube"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -40,10 +40,12 @@ func WatchServices(socket infra.Socket, mutex *sync.Mutex) {
 
 	for event := range channel {
 		if service, ok := event.Object.(*v1.Service); ok {
-			// Critical Section : Multiple goroutines may write to socket at same time.
-			mutex.Lock()
-			socket.Write(mapService(service, "SVC_"+string(event.Type)))
-			mutex.Unlock()
+			if service.Name != "kubernetes" {
+				// Critical Section : Multiple goroutines may write to socket at same time.
+				mutex.Lock()
+				socket.Write(mapService(service, "SVC_"+string(event.Type)))
+				mutex.Unlock()
+			}
 		}
 	}
 }

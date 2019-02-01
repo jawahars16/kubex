@@ -21,11 +21,11 @@ package v1alpha1
 import (
 	"time"
 
+	scheme "github.com/jawahars16/kubex/metrics/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	watch "k8s.io/apimachinery/pkg/watch"
 	rest "k8s.io/client-go/rest"
 	v1alpha1 "k8s.io/metrics/pkg/apis/metrics/v1alpha1"
-	scheme "github.com/jawahars16/kube-monitor/metrics/scheme"
 )
 
 // PodMetricsesGetter has a method to return a PodMetricsInterface.
