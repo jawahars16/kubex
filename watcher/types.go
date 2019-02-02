@@ -31,6 +31,7 @@ type Event struct {
 type Service struct {
 	Meta     `json:"meta,omitempty"`
 	Selector map[string]string `json:"selector,omitempty"`
+	Pods     []string          `json:"pods,omitempty"`
 	IP       string            `json:"ip,omitempty"`
 }
 
@@ -45,10 +46,10 @@ type Pod struct {
 }
 
 type Node struct {
-	Name    string  `json:"name,omitempty"`
-	CPU     float64 `json:"cpu"`
-	Memory  float64 `json:"memory"`
-	ReadyStatus bool `json:"readyStatus"`
+	Name        string  `json:"name,omitempty"`
+	CPU         float64 `json:"cpu"`
+	Memory      float64 `json:"memory"`
+	ReadyStatus bool    `json:"readyStatus"`
 }
 
 type PodMetrics struct {
@@ -56,4 +57,9 @@ type PodMetrics struct {
 	CPU    float64 `json:"cpu"`
 	Memory float64 `json:"memory"`
 	Error  string  `json:"error,omitempty"`
+}
+
+type Deployment struct {
+	Meta `json:"meta,omitempty"`
+	Pods []string `json:"pods,omitempty"`
 }

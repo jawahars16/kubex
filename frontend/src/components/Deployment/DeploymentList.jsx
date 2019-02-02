@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row } from 'antd';
-import Service from '../../containers/Service';
+import Deployment from '../../containers/Deployment';
 
-class ServiceList extends Component {
+class DeploymentList extends Component {
 
   componentDidMount() {
     this.props.initialize();
@@ -13,11 +13,11 @@ class ServiceList extends Component {
       <div>
         <Row >
           {this.props.data.map(item => (
-            <Service key={item.meta.key} name={item.meta.name} />))}
+            <Deployment key={item.meta.key} name={item.meta.name} />))}
         </Row>
       </div>
     );
   }
 }
 
-export default ServiceList;
+export default DeploymentList;

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import ServicePod from './ServicePod';
-import { Row } from 'antd';
-import moment from 'moment';
+import Pod from './Pod';
 
-class ServicePods extends Component {
+class PodList extends Component {
 
   render() {
     return (
       <div style={{ flex: 1, flexDirection: 'row', display: 'flex', ...this.props.style }}>
-        {this.props.data.map(pod => <ServicePod
+        {this.props.data.map(pod => <Pod
           key={pod.meta.id}
           name={pod.meta.name}
           created={pod.meta.created}
@@ -20,4 +18,4 @@ class ServicePods extends Component {
   }
 }
 
-export default ServicePods;
+export default PodList;

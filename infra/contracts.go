@@ -1,12 +1,9 @@
 package infra
 
-import (
-	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
-)
-
-type KubeClient interface {
-	CoreV1() corev1.CoreV1Interface
-}
+// type KubeClient interface {
+// 	CoreV1() corev1.CoreV1Interface
+// 	AppsV1beta2() corev1.Ap
+// }
 
 // Socket ...
 type Socket interface {

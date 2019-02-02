@@ -30,6 +30,18 @@ func NodeHandler(w http.ResponseWriter, r *http.Request) {
 	go watcher.WatchPods(socket, mutex)
 }
 
+// DeploymentHandler ...
+func DeploymentHandler(w http.ResponseWriter, r *http.Request) {
+	socket := NewSocket(w, r)
+	var mutex = &sync.Mutex{}
+
+	go watcher.WatchEvents(socket, mutex)
+	go watcher.WatchPodMetrics(socket, mutex)
+	go watcher.WatchNodes(socket, mutex)
+	go watcher.WatchPods(socket, mutex)
+	go watcher.WatchDeployments(socket, mutex)
+}
+
 // Initialize ...
 func Initialize(path string, handler func(w http.ResponseWriter, r *http.Request), addr string) {
 	fs := http.FileServer(http.Dir("../frontend/build"))

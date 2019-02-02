@@ -6,7 +6,9 @@ import (
 	"github.com/jawahars16/kubex/infra"
 	"github.com/jawahars16/kubex/kube"
 	v1 "k8s.io/api/core/v1"
+	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/labels"
 )
 
 func mapService(service *v1.Service, action string) Payload {
@@ -16,6 +18,11 @@ func mapService(service *v1.Service, action string) Payload {
 	if len(ingress) > 0 {
 		ip = service.Status.LoadBalancer.Ingress[0].IP
 	}
+
+	labelSelector := labels.SelectorFromSet(service.Spec.Selector)
+	options := metaV1.ListOptions{LabelSelector: labelSelector.String()}
+	pods := kube.GetPodList(service.Namespace, options)
+
 	meta := Meta{
 		ID:        string(service.UID),
 		Name:      service.Name,
@@ -27,6 +34,7 @@ func mapService(service *v1.Service, action string) Payload {
 		Meta:     meta,
 		IP:       ip,
 		Selector: service.Spec.Selector,
+		Pods:     pods,
 	}
 	return Payload{
 		Action:   action,

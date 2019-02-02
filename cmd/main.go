@@ -13,8 +13,9 @@ func main() {
 	kube.InitializeClient()
 	kube.InitializeMetricsClient()
 
+	// backend.Initialize("/deployment", backend.DeploymentHandler, ":5000")
 	backend.Initialize("/service", backend.ServiceHandler, ":5000")
-	backend.Initialize("/node", backend.NodeHandler, ":5000")
+	// backend.Initialize("/node", backend.NodeHandler, ":5000")
 
 	for {
 		time.Sleep(time.Second)

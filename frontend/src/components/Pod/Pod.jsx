@@ -12,7 +12,7 @@ const statusColors = {
   NProgress: materialColors.orange
 }
 
-class ServicePod extends Component {
+class Pod extends Component {
   constructor(props) {
     super(props);
     this.state = { ts: moment(this.props.created).fromNow() }
@@ -42,4 +42,4 @@ class ServicePod extends Component {
   }
 }
 
-export default ServicePod;
+export default Pod;

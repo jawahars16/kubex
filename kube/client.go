@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/jawahars16/kubex/infra"
+	beta1 "k8s.io/client-go/kubernetes/typed/extensions/v1beta1"
 
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -15,7 +15,8 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-var client infra.KubeClient
+var client kubernetes.Interface
+var extendedClient *beta1.ExtensionsV1beta1Client
 
 // GetServiceChannel ...
 func GetServiceChannel(options metav1.ListOptions, namespace string) <-chan watch.Event {
@@ -73,6 +74,32 @@ func GetNodeChannel() <-chan watch.Event {
 		log.Fatal(err)
 	}
 	return watch.ResultChan()
+}
+
+// GetDeploymentChannel ...
+func GetDeploymentChannel() <-chan watch.Event {
+
+	watch, err := client.AppsV1beta1().Deployments("").Watch(metav1.ListOptions{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	return watch.ResultChan()
+}
+
+// GetPodList ...
+func GetPodList(namespace string, opts metav1.ListOptions	) []string {
+	podNames := []string{}
+	list, err := client.CoreV1().Pods(namespace).List(opts)
+	if err != nil {
+		log.Fatal(err)
+		return podNames
+	}
+
+	for _, pod := range list.Items {
+		podNames = append(podNames, pod.Name)
+	}
+
+	return podNames
 }
 
 // InitializeClient kube client

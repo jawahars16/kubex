@@ -1,19 +1,12 @@
-import React, { Component } from 'react';
-import './App.css';
 import moment from 'moment';
-import kubeState from './reducers'
-import { createStore, applyMiddleware, compose } from 'redux';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import Services from './containers/Services';
-import { Layout } from 'antd';
-import Meter from './components/Common/Meter';
-import Service from './components/Service/Service';
-import LinearMeter from './components/Common/LinearMeter';
-import { materialColors } from './common/colors';
-import Node from './components/Node/Node';
-import Nodes from './containers/Nodes';
-const { Header, Content } = Layout;
+import './App.css';
+import DeploymentList from './containers/DeploymentList';
+import kubeState from './reducers';
+import ServiceList from './containers/ServiceList';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(kubeState, composeEnhancers(applyMiddleware(thunk)));
@@ -40,7 +33,8 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Services />
+        {/* <DeploymentList /> */}
+        <ServiceList />
         {/* <Nodes /> */}
       </Provider>
     );

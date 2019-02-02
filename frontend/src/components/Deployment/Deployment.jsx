@@ -1,19 +1,16 @@
+import { Col, Divider, Row } from 'antd';
 import React, { Component } from 'react';
-import { Col, Row, Divider } from 'antd';
-import Meter from '../Common/Meter';
 import { getResourceSectionsAndUsage } from '../../core/resource';
+import Meter from '../Common/Meter';
 import PodList from '../Pod/PodList';
 
-class Service extends Component {
+class Deployment extends Component {
 
   render() {
     const { cpu, memory, name, ip, pods } = this.props;
 
     let cpuDetail = getResourceSectionsAndUsage(cpu);
     let memoryDetail = getResourceSectionsAndUsage(memory);
-
-    const runningPods = pods.filter(p => p.state === 'Running').length;
-    const totalPods = pods.length;
 
     return (
       <div>
@@ -30,7 +27,6 @@ class Service extends Component {
               }}>{name}</div>
             </Row>
             <Row>
-              {/* <Divider style={{ marginTop: 0 }}>{runningPods} out of {totalPods} pods running</Divider> */}
               <Divider>
                 <PodList data={pods} />
               </Divider>
@@ -60,4 +56,4 @@ class Service extends Component {
   }
 }
 
-export default Service;
+export default Deployment;

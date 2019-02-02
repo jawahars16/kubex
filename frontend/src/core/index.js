@@ -1,17 +1,8 @@
 import { ensureValue } from "./utils";
 
-export const filterResourcesBySelector = (selector, resources) => {
-
+export const filterResources = (container, resources) => {
   if (!resources || resources.length <= 0) return [];
-
-  return resources.filter(r => {
-    for (let key in selector) {
-      const valid = key in r.meta.labels && r.meta.labels[key] === selector[key];
-      if (!valid)
-        return false;
-    }
-    return true;
-  });
+  return resources.filter(pod => container.pods.includes(pod.meta.name))
 }
 
 export const findMaxCPUUsageResource = resources => {
@@ -64,7 +55,7 @@ export const getAvailableCPU = (node, resource, resources) => {
   return node.cpu - consumed;
 }
 
-export const getCPUMetrics = (selector, allResources, nodes) => {
+export const getCPUMetrics = (container, allResources, nodes) => {
   const defaultMetrics = {
     capacity: 0,
     request: 0,
@@ -75,7 +66,7 @@ export const getCPUMetrics = (selector, allResources, nodes) => {
   if (!allResources || allResources.length <= 0) return defaultMetrics;
   if (!nodes || nodes.length <= 0) return defaultMetrics;
 
-  const resources = filterResourcesBySelector(selector, allResources);
+  const resources = filterResources(container, allResources);
   const resource = findMaxCPUUsageResource(resources);
   const node = findNode(nodes, resource);
   const pods = getResourcesFromNode(node, allResources);
@@ -125,7 +116,7 @@ export const getAvailableMemory = (node, resource, resources) => {
   return node.memory - consumed;
 }
 
-export const getUMemoryMetrics = (selector, allResources, nodes) => {
+export const getUMemoryMetrics = (container, allResources, nodes) => {
   const defaultMetrics = {
     capacity: 0,
     request: 0,
@@ -136,7 +127,7 @@ export const getUMemoryMetrics = (selector, allResources, nodes) => {
   if (!allResources || allResources.length <= 0) return defaultMetrics;
   if (!nodes || nodes.length <= 0) return defaultMetrics;
 
-  const resources = filterResourcesBySelector(selector, allResources);
+  const resources = filterResources(container, allResources);
   const resource = findMaxMemoryUsageResource(resources);
   const node = findNode(nodes, resource);
   const pods = getResourcesFromNode(node, allResources);

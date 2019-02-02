@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
-import Service from '../components/Service/Service';
 import { getCPUMetrics, getUMemoryMetrics, filterResources } from '../core';
+import Deployment from '../components/Deployment/Deployment';
 
 const mapStateToProps = (state, ownProps) => {
 
-  const service = state.services.find(s => s.meta.name === ownProps.name);
-  const cpuMetrics = getCPUMetrics(service, state.pods, state.nodes);
-  const memoryMetrics = getUMemoryMetrics(service, state.pods, state.nodes);
-  const resources = filterResources(service, state.pods);
+  const deployment = state.deployments.find(s => s.meta.name === ownProps.name);
+  const cpuMetrics = getCPUMetrics(deployment, state.pods, state.nodes);
+  const memoryMetrics = getUMemoryMetrics(deployment, state.pods, state.nodes);
+  const resources = filterResources(deployment, state.pods);
   const runningPodsLength = resources.filter(p => p.state === 'Running').length;
 
   return {
-    name: service.meta.name,
-    ip: service.ip,
+    name: deployment.meta.name,
+    ip: deployment.ip,
     cpu: cpuMetrics,
     memory: memoryMetrics,
     hasWarning: (resources.length - runningPodsLength) > 0,
@@ -23,4 +23,4 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps
-)(Service)
+)(Deployment)

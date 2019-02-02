@@ -1,7 +1,6 @@
 package watcher
 
 import (
-	"log"
 	"sync"
 
 	"github.com/jawahars16/kubex/infra"
@@ -43,7 +42,6 @@ func WatchNodes(socket infra.Socket, mutex *sync.Mutex) {
 		if node, ok := event.Object.(*v1.Node); ok {
 			nodeDetail := mapNode(node, "NODE_"+string(event.Type))
 			mutex.Lock()
-			log.Println(nodeDetail)
 			socket.Write(nodeDetail)
 			mutex.Unlock()
 		}
