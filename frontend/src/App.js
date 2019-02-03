@@ -4,9 +4,8 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import './App.css';
-import DeploymentList from './containers/DeploymentList';
 import kubeState from './reducers';
-import ServiceList from './containers/ServiceList';
+import Root from './containers/Root';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(kubeState, composeEnhancers(applyMiddleware(thunk)));
@@ -33,9 +32,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        {/* <DeploymentList /> */}
-        <ServiceList />
-        {/* <Nodes /> */}
+        <Root />
       </Provider>
     );
   }

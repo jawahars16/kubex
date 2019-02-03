@@ -63,3 +63,7 @@ type Deployment struct {
 	Meta `json:"meta,omitempty"`
 	Pods []string `json:"pods,omitempty"`
 }
+
+type AppMeta struct {
+	Resource string `json:"resource,omitempty"`
+}

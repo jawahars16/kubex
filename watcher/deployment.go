@@ -35,8 +35,8 @@ func mapDeployment(deployment *v1beta1.Deployment, action string) Payload {
 }
 
 // WatchDeployments ...
-func WatchDeployments(socket infra.Socket, mutex *sync.Mutex) {
-	channel := kube.GetDeploymentChannel() // TODO: Get namespace from user
+func WatchDeployments(socket infra.Socket, mutex *sync.Mutex, namespace string) {
+	channel := kube.GetDeploymentChannel(namespace)
 
 	for event := range channel {
 		if deployment, ok := event.Object.(*v1beta1.Deployment); ok {

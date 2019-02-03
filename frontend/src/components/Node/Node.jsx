@@ -11,13 +11,12 @@ const tick = <img src="https://img.icons8.com/ios-glyphs/30/ffffff/checkmark.png
 
 class Node extends Component {
   render() {
-    console.log(this.props);
     const { cpu, memory, readyStatus, name } = this.props;
 
     let cpuDetail = getNodeSectionsAndUsage(cpu);
     let memoryDetail = getNodeSectionsAndUsage(memory);
     this.classes = classNames({
-      'circle': true,
+      'circle-lg': true,
       'inner-shadow': true
     })
 

@@ -7,7 +7,6 @@ import (
 	"github.com/jawahars16/kubex/kube"
 	v1 "k8s.io/api/core/v1"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 )
 
@@ -43,8 +42,8 @@ func mapService(service *v1.Service, action string) Payload {
 }
 
 // WatchServices ...
-func WatchServices(socket infra.Socket, mutex *sync.Mutex) {
-	channel := kube.GetServiceChannel(metav1.ListOptions{}, "") // TODO: Get namespace from user
+func WatchServices(socket infra.Socket, mutex *sync.Mutex, namespace string) {
+	channel := kube.GetServiceChannel(namespace) // TODO: Get namespace from user
 
 	for event := range channel {
 		if service, ok := event.Object.(*v1.Service); ok {

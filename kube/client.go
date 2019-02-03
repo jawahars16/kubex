@@ -19,8 +19,8 @@ var client kubernetes.Interface
 var extendedClient *beta1.ExtensionsV1beta1Client
 
 // GetServiceChannel ...
-func GetServiceChannel(options metav1.ListOptions, namespace string) <-chan watch.Event {
-	watcher, err := client.CoreV1().Services(namespace).Watch(options)
+func GetServiceChannel(namespace string) <-chan watch.Event {
+	watcher, err := client.CoreV1().Services(namespace).Watch(metav1.ListOptions{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -77,9 +77,9 @@ func GetNodeChannel() <-chan watch.Event {
 }
 
 // GetDeploymentChannel ...
-func GetDeploymentChannel() <-chan watch.Event {
+func GetDeploymentChannel(namespace string) <-chan watch.Event {
 
-	watch, err := client.AppsV1beta1().Deployments("").Watch(metav1.ListOptions{})
+	watch, err := client.AppsV1beta1().Deployments(namespace).Watch(metav1.ListOptions{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -87,7 +87,7 @@ func GetDeploymentChannel() <-chan watch.Event {
 }
 
 // GetPodList ...
-func GetPodList(namespace string, opts metav1.ListOptions	) []string {
+func GetPodList(namespace string, opts metav1.ListOptions) []string {
 	podNames := []string{}
 	list, err := client.CoreV1().Pods(namespace).List(opts)
 	if err != nil {
