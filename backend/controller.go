@@ -56,7 +56,6 @@ func metaHandler(resource string) func(w http.ResponseWriter, r *http.Request) {
 		socket := NewSocket(w, r)
 		var mutex = &sync.Mutex{}
 		watcher.WriteMeta(resource, socket, mutex)
-		fmt.Println(resource)
 	}
 }
 
