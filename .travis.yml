@@ -1,7 +1,6 @@
 language: go
 go:
   - 1.11.x
-  - master
 git:
   depth: 1
 before_install:
