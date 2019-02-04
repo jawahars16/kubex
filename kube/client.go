@@ -13,6 +13,12 @@ import (
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
+
+	// Initialize all known client auth plugins.
+	_ "k8s.io/client-go/plugin/pkg/client/auth/azure"
+	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
+	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
+	_ "k8s.io/client-go/plugin/pkg/client/auth/openstack"
 )
 
 var client kubernetes.Interface
@@ -112,7 +118,13 @@ func InitializeClient() {
 		panic(err.Error())
 	}
 
-	client, _ = kubernetes.NewForConfig(config)
+	kubeClient, e := kubernetes.NewForConfig(config)
+
+	if e != nil {
+		panic(e.Error())
+	}
+
+	client = kubeClient
 
 	log.Println("Kubernetes client initialized - ", config.Host)
 }
