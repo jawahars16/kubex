@@ -1,0 +1,11 @@
+language: go
+go: 
+  -1.11.x
+
+install:
+  - go get -u github.com/golang/dep/...
+  - dep ensure
+
+script:
+  - go build
+
