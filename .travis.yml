@@ -4,10 +4,11 @@ before_install:
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   - dep ensure
 script:
-  - go build
+- go build
 deploy:
   provider: releases
-  api_key: a847f97cf08033019ce4a904507c29496447a31f
+  api_key:
+    secure: B1BwkzpNUGwcwJBHmZXsqrzhi8fk3m7t31eJ7uvV/Pr/4ue4BfJJHOSBJXoiz6QigXGr1BJoDG7icKcYjquECqByijxW6OZ20zRcUsZja0NXu4eZdj6yEzs52u8Q6gpbhthSQM2R1xNk44fokzGAF+N9nnH5Zu8VX26xIrSdeuQu1KxWvvUR5OUEkdAmvYDkYcu2E6/yBqdxogiWE9qaKeXKH/0EOWUz+WbfHQf9soS4PQKIeQ/I/rjE6Ui/yfsJd9F3+c1ASHxGIxQK971f4JHSiAbAovepwxH5vva3QE8GCc3lHpuk4+B6TaEwRU71ysLovDs7wlIP/o8ghHIUahL33KWcyDvNLmSHAvUqQytAnZLWXiFGnV9cb68zL0L6eF+fuZyv411cYD6Y7LARAfzAIuTeXgRf0y0967MBas/OQQzA+guaG41YFLFB3FQHASYAZLOJfLJ+al48B2+bOL1c18swC6O/8Age+UxLsSfBe5cZw0jSB2Jt89nAF8+U3T/X3ny3X6m4JMgPvAlNjAqeP9qW/BEy6+c5JzhXE6J7DSLAfEoq/1/uiAg247IHm6+d7XCXhX0oq8LW0JcrrcEx08QQaRoAbLj8pE8Up68ic/3x6ex0wZc1v3pANr0RzIpvnHmg3L3BdDg9O1X33EMLC0NmVA2/t5PUa/JNiQs=
   file: kubex
   on:
     repo: jawahars16/kubex
