@@ -8,7 +8,7 @@ before_install:
   - dep ensure
 script:
 - go build
-before
+- echo "Build completed"
 deploy:
   provider: releases
   skip_cleanup: true
