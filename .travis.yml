@@ -1,18 +1,19 @@
 language: go
 go:
-- 1.11.x
+  - 1.11.x
 git:
   depth: 1
 before_install:
-- curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-- dep ensure
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - dep ensure
 script:
 - go build
 - echo "Build completed"
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
     secure: oCxb/Xq4xFtIsnTl+PZIBoWySR6jnWgAbMJEvLP2Q5h/v5cYum1DAUV8xvx5RdEQ1/1jsj/YoL6BimqNef8OUMGDSagkRZClrZGaMSA+JikgdOPBOWYVv0Ml/U+p2PfYzSf64e6A/NE9ADPUdWZl+XSVl8t6mEbNhzwVxmkfdL7/D6hCWv/G71rL/SysaFf3es0jScPLCV6EiS/eZXO5nawXs5BZfaQ6fZOa/C+igPeMd27+hdjCGg1WjxFFxcCzVI8midBGPKY0RYnKGFJx2v/Q6Q4NWmNTLgGncxfdH5c8DKmUNO2wJRsQ7GAPQ8oQkJGA03lCm3bxR/7ek+QNJGmoykMOeXhmEfs63LWG1UjWfVU5Q/tzT9e3K3LH5D8Sg2IofWRM4QhLFGJbEwL838uxAJR8pXMMlGowXMssEXmkfMAFH5k6piAksXCVkTlMkDArRHnxxbazVTf3PhTOpDOFDFH3PjBXUIPSO3/41j4qj21/LAGOHqAeQChLwehan4cHTu84NFnXs9iyqvSSRaquJZ0oxqAGWEEO9PxFGMn7GW2ltPXjcdcttXQ/WYhVmUc9vFXzannjpumf+0G+NL82CMv1+1fD2W+OOaRtFlfMcuoEKx3aFgw4RzkJod2rRESPgIhAQw96xnTiB/+1XDTfqIrahpg269Ibs31i6os=
   file: kubex
   on:
-    repo: jawahars16/kubex
+    tags: true
