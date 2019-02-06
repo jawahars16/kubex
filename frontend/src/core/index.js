@@ -1,6 +1,7 @@
 import { ensureValue } from "./utils";
 
 export const filterResources = (container, resources) => {
+  if(!container || !container.pods) return [];
   if (!resources || resources.length <= 0) return [];
   return resources.filter(pod => container.pods.includes(pod.meta.name))
 }
