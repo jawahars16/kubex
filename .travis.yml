@@ -7,8 +7,8 @@ before_install:
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   - dep ensure
 script:
+- yarn build
 - go build
-- echo "Build completed"
 deploy:
   provider: releases
   skip_cleanup: true
