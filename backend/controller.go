@@ -2,8 +2,9 @@ package backend
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+	"os/exec"
+	"runtime"
 	"sync"
 
 	"github.com/jawahars16/kubex/watcher"
@@ -70,9 +71,29 @@ func Initialize(
 	http.Handle("/", fs)
 	http.HandleFunc(fmt.Sprintf("/%s", path), handler(namespace))
 	http.HandleFunc("/meta", metaHandler(path))
-	err := http.ListenAndServe(addr, nil)
-	if err != nil {
-		log.Printf(err.Error())
-	}
 
+	go func() {
+		fmt.Printf("Server started at localhost%s", addr)
+		open(fmt.Sprintf("http://localhost%s", addr))
+	}()
+
+	panic(http.ListenAndServe(addr, nil))
+}
+
+// open opens the specified URL in the default browser of the user.
+func open(url string) error {
+	var cmd string
+	var args []string
+
+	switch runtime.GOOS {
+	case "windows":
+		cmd = "cmd"
+		args = []string{"/c", "start"}
+	case "darwin":
+		cmd = "open"
+	default: // "linux", "freebsd", "openbsd", "netbsd"
+		cmd = "xdg-open"
+	}
+	args = append(args, url)
+	return exec.Command(cmd, args...).Start()
 }
