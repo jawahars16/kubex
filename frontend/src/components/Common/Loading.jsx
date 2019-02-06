@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Spin, Empty } from 'antd';
+import { Col, Empty } from 'antd';
 
 class Loading extends Component {
 

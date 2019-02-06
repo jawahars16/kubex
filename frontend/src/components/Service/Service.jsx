@@ -7,13 +7,10 @@ import PodList from '../Pod/PodList';
 class Service extends Component {
 
   render() {
-    const { cpu, memory, name, ip, pods } = this.props;
+    const { cpu, memory, name, pods } = this.props;
 
     let cpuDetail = getResourceSectionsAndUsage(cpu);
     let memoryDetail = getResourceSectionsAndUsage(memory);
-
-    const runningPods = pods.filter(p => p.state === 'Running').length;
-    const totalPods = pods.length;
 
     return (
       <div>

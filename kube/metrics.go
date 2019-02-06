@@ -22,28 +22,6 @@ func InitializeMetricsClient() {
 	}
 
 	metricsClient, _ = metrics.NewForConfig(config)
-
-	// mc.MetricsV1beta1().NodeMetricses().Get("your node name", metav1.GetOptions{})
-	// mc.MetricsV1beta1().NodeMetricses().List(metav1.ListOptions{})
-	// mc.MetricsV1beta1().PodMetricses(metav1.NamespaceAll).List(metav1.ListOptions{})
-	// m, err := mc.MetricsV1beta1().PodMetricses("default").List(metav1.ListOptions{})
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// for _, pod := range m.Items {
-	// 	podContainers := pod.Containers
-	// 	for _, container := range podContainers {
-	// 		fmt.Println(container.Usage.Cpu())
-	// 		fmt.Println(container.Usage.Memory())
-	// 		cpuQuantity := container.Usage.Cpu().String()
-	// 		memQuantity, ok := container.Usage.Memory().AsInt64()
-	// 		if !ok {
-	// 			return
-	// 		}
-	// 		msg := fmt.Sprintf("Container Name: %s \n CPU usage: %d \n Memory usage: %d", container.Name, cpuQuantity, memQuantity)
-	// 		fmt.Println(msg)
-	// 	}
-	// }
 }
 
 type errorString struct {

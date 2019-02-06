@@ -7,7 +7,7 @@ import PodList from '../Pod/PodList';
 class Deployment extends Component {
 
   render() {
-    const { cpu, memory, name, ip, pods } = this.props;
+    const { cpu, memory, name, pods } = this.props;
 
     let cpuDetail = getResourceSectionsAndUsage(cpu);
     let memoryDetail = getResourceSectionsAndUsage(memory);

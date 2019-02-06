@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Avatar, Col, Tooltip, Spin, Icon } from 'antd';
+import { Tooltip } from 'antd';
 import moment from 'moment';
 import { materialColors } from '../../common/colors';
 const classNames = require('classnames');

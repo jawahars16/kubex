@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { RadialGauge, LinearGauge } from 'canvas-gauges';
 import { materialColors } from '../../common/colors';
+import { LinearGauge } from 'canvas-gauges';
 
 class LinearMeter extends Component {
 
