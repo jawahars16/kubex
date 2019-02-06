@@ -1,4 +1,4 @@
-## kubex
+## Kubex
 
 [![Build Status](https://travis-ci.org/jawahars16/kubex.svg?branch=master)](https://travis-ci.org/jawahars16/kubex)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jawahars16/kubex)](https://goreportcard.com/report/github.com/jawahars16/kubex)
@@ -37,9 +37,7 @@ kubex watch node
 
 ### Prerequisites
 
-Kubex reads cluster information from default kube config file. $HOME/.kube/config
-
-Before start watching the state using kubex, make sure you set a context entry in kubeconfig.
+Kubex reads cluster information from default kube config file($HOME/.kube/config). Before start watching the state using kubex, make sure you set a context entry in kubeconfig.
 
 ```
 kubectl config set-context NAME [--cluster=cluster_nickname] [--user=user_nickname] [--namespace=namespace]
