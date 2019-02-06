@@ -34,6 +34,11 @@ var watchCmd = &cobra.Command{
 
 		resource := args[0]
 		if watcher, ok := supportedWatchers[resource]; ok {
+			defer func() {
+				if r := recover(); r != nil {
+					fmt.Println("Cannot start kubex - ", r)
+				}
+			}()
 			kube.InitializeClient()
 			kube.InitializeMetricsClient()
 			requestedNamespace := namespace

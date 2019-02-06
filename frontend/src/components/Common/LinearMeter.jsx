@@ -37,7 +37,7 @@ class LinearMeter extends Component {
       animationDuration: 1500,
       animationRule: "linear",
       animationTarget: "plate",
-      barWidth: 2,
+      barWidth: 6,
       ticksWidth: 60,
       highlightsWidth: 60,
       colorNumbers: 'white, red',

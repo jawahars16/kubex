@@ -125,6 +125,4 @@ func InitializeClient() {
 	}
 
 	client = kubeClient
-
-	log.Println("Kubernetes client initialized - ", config.Host)
 }

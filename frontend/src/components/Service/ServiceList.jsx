@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row } from 'antd';
 import Service from '../../containers/Service';
+import Loading from '../Common/Loading';
 
 class ServiceList extends Component {
 
@@ -9,6 +10,11 @@ class ServiceList extends Component {
   }
 
   render() {
+
+    if (!this.props.data || this.props.data.length === 0) {
+      return <Loading />
+    }
+
     return (
       <div>
         <Row >

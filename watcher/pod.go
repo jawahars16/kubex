@@ -77,7 +77,7 @@ func WatchPods(socket infra.Socket, mutex *sync.Mutex) {
 
 // WatchPodMetrics ...
 func WatchPodMetrics(socket infra.Socket, mutex *sync.Mutex) {
-	ticker := time.NewTicker(time.Millisecond * 1000 * 30) // TODO: Get poll interval from user
+	ticker := time.NewTicker(time.Millisecond * 1000 * 3) // TODO: Get poll interval from user
 
 	writePodMetrics(socket, mutex)
 	for range ticker.C {

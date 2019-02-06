@@ -42,9 +42,9 @@ export const getNodeSectionsAndUsage = resource => {
   let usage = getUsage(resource);
 
   const colorize = value => {
-    if (value <= 0.6) {
+    if (value <= 0.7) {
       return materialColors.green;
-    } else if (value <= 0.8) {
+    } else if (value <= 0.9) {
       return materialColors.orange;
     } else {
       return materialColors.red;

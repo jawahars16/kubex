@@ -17,7 +17,6 @@ class Gauge extends Component {
     this.drawOuterCircle();
     this.drawSections();
     this.drawInsideArc();
-    // this.drawValue();
   }
 
   prepareCanvas() {
