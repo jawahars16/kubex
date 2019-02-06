@@ -20,20 +20,16 @@ Note: Homebrew installation is planned.
 To watch the state and resources (CPU and memory) of all your services
 
 ```
-kubex watch service
+kubex watch [resource] [--port port_number] [--namespace cluster_namespace]
 ```
 
-To watch all your deployments
+Example
 
 ```
-kubex watch deployment
+kubex watch service --port 5000 --namespace dallas_team
 ```
 
-To watch all your nodes
-
-```
-kubex watch node
-```
+Use ```--all-namespaces``` flag to watch resources from all namespaces. Kubex support watching service, node and deployments for now.
 
 ### Prerequisites
 
