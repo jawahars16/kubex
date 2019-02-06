@@ -1,4 +1,4 @@
-import { filterResourcesBySelector, findMaxCPUUsageResource, findNode, getResourcesFromNode, getAvailableCPU, getCPUMetrics } from "./index";
+import { filterResourcesBySelector, findMaxCPUUsageResource, findNode, getResourcesFromNode, getAvailableCPU, getCPUMetrics, filterResources } from "./index";
 import compose from 'lodash/fp/compose'
 
 const createResourceWithLabels = (name, labels) => (
@@ -19,33 +19,18 @@ const createEmptyResource = name => ({
 })
 
 it('Get resources by selector', function () {
-  const selector = { "key": "value" };
+  const container = {
+    pods: ["pod1"]
+  };
+
   const resources = [
-    createResourceWithLabels("pod1", { "key": "value" }),
-    createResourceWithLabels("pod2", { "key": "value" }),
-    createResourceWithLabels("pod3", { "otherkey": "othervalue" })
+    createResourceWithLabels("pod1"),
+    createResourceWithLabels("pod2"),
+    createResourceWithLabels("pod3")
   ];
-  const pods = filterResourcesBySelector(selector, resources);
+
+  const pods = filterResources(container, resources);
   expect(pods[0].meta.name).toBe("pod1");
-  expect(pods[1].meta.name).toBe("pod2");
-})
-
-it('Get resources by multiple selector', function () {
-  const selector = { "key1": "value1", "key2": "value2" };
-  const resources = [
-    createResourceWithLabels("pod1", { "key": "value", "key1": "value1" }),
-    createResourceWithLabels("pod2", { "key2": "value2", "key1": "value1" })
-  ];
-  const pods = filterResourcesBySelector(selector, resources);
-  expect(pods[0].meta.name).toBe("pod2");
-  expect(pods.length).toBe(1);
-})
-
-it('Get resources by empty selectors', function () {
-  const selector = { "key1": "value1", "key2": "value2" };
-  const resources = [];
-  const pods = filterResourcesBySelector(selector, resources);
-  expect(pods.length).toBe(0);
 })
 
 it('Get resource with max CPU usage', function () {

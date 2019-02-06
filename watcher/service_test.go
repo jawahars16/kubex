@@ -36,7 +36,7 @@ func createMockService() *v1.Service {
 
 func Test_mapService(t *testing.T) {
 	service := createMockService()
-	got := mapService(service, "test_action")
+	got := mapService(service, "test_action", []string{"pod1", "pod2"})
 	gotResource := got.Resource.(Service)
 	assert.AreStringEqual(t, "test_action", got.Action)
 	assert.AreStringEqual(t, "test_service", gotResource.Meta.Name)
@@ -45,6 +45,8 @@ func Test_mapService(t *testing.T) {
 	assert.AreStringEqual(t, "labelValue", gotResource.Labels["labelKey"])
 	assert.AreStringEqual(t, "selectorValue", gotResource.Selector["selectorKey"])
 	assert.AreStringEqual(t, "test_ip", gotResource.IP)
+	assert.AreStringEqual(t, "pod1", gotResource.Pods[0])
+	assert.AreStringEqual(t, "pod2", gotResource.Pods[1])
 	gotTime, _ := time.Parse(time.RFC3339, "2006-01-02T15:04:05+07:00")
 	assert.AreStringEqual(t, gotTime.String(), gotResource.Meta.Created.Time.String())
 }
@@ -52,7 +54,7 @@ func Test_mapService(t *testing.T) {
 func Test_mapService_with_no_ingress(t *testing.T) {
 	service := createMockService()
 	service.Status.LoadBalancer.Ingress = nil
-	got := mapService(service, "test_action")
+	got := mapService(service, "test_action", []string{"pod1", "pod2"})
 	gotResource := got.Resource.(Service)
 	assert.AreStringEqual(t, "", gotResource.IP)
 }
