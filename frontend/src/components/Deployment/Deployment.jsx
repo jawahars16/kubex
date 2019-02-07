@@ -9,16 +9,9 @@ class Deployment extends Component {
   render() {
     const { cpu, memory, name, pods } = this.props;
 
-    // console.log("-------------")
-    // console.log(name)
-    // console.log(this.props)
-
     let cpuDetail = getResourceSectionsAndUsage(cpu);
     let memoryDetail = getResourceSectionsAndUsage(memory);
 
-    // console.log(cpuDetail)
-    // console.log(memoryDetail)
-    
     return (
       <div>
         <Col span={8} style={{ padding: 3 }}>

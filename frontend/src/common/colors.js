@@ -1,5 +1,6 @@
 export const materialColors = {
   red: '#F44336',
+  darkOrange: '#FE5723',
   orange: '#FF9800',
   green: '#4CAF50',
   gray: '#9E9E9E',

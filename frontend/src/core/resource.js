@@ -30,9 +30,9 @@ export const getResourceSectionsAndUsage = resource => {
   resourceLimit = resourceLimit <= 0 && resourceRequest <= 0 ? 1 : resourceLimit;
 
   let sections = [
-    { from: 0, to: resourceRequest, color: materialColors.green },
+    { from: 0, to: resourceRequest, color: resourceRequest >= 1 ? materialColors.red : materialColors.green },
     { from: resourceRequest, to: resourceLimit, color: materialColors.orange },
-    { from: resourceLimit, to: 1.0, color: materialColors.red }
+    { from: resourceLimit, to: 1.0, color: materialColors.darkOrange }
   ];
   return { sections, usage };
 }
@@ -47,7 +47,7 @@ export const getNodeSectionsAndUsage = resource => {
     } else if (value <= 0.9) {
       return materialColors.orange;
     } else {
-      return materialColors.red;
+      return materialColors.darkOrange;
     }
   }
 
