@@ -8,7 +8,7 @@ const statusColors = {
   Running: materialColors.green,
   Failed: materialColors.red,
   Pending: materialColors.gray,
-  PProgress: materialColors.lightGreen,
+  PProgress: materialColors.orange,
   NProgress: materialColors.orange
 }
 

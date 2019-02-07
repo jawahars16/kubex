@@ -1,7 +1,7 @@
 import { ensureValue } from "./utils";
 
 export const filterResources = (container, resources) => {
-  if(!container || !container.pods) return [];
+  if (!container || !container.pods) return [];
   if (!resources || resources.length <= 0) return [];
   return resources.filter(pod => container.pods.includes(pod.meta.name))
 }
@@ -11,18 +11,13 @@ export const findMaxCPUUsageResource = resources => {
 
   if (!resources || resources.length <= 0) return maxUsageResource;
 
-  resources.reduce((x, y) => {
-    const xUsage = x.usage || { cpu: 0 };
-    const yUsage = y.usage || { cpu: 0 };
-
-    if (xUsage.cpu > yUsage.cpu) {
-      maxUsageResource = x;
-      return x;
+  resources.forEach(element => {
+    if (!maxUsageResource) {
+      maxUsageResource = element;
+    } else if (element.usage && maxUsageResource.usage.cpu < element.usage.cpu) {
+      maxUsageResource = element;
     }
-
-    maxUsageResource = y;
-    return y;
-  })
+  });
   return maxUsageResource;
 }
 
@@ -67,11 +62,22 @@ export const getCPUMetrics = (container, allResources, nodes) => {
   if (!allResources || allResources.length <= 0) return defaultMetrics;
   if (!nodes || nodes.length <= 0) return defaultMetrics;
 
+  console.log('---------')
   const resources = filterResources(container, allResources);
+  console.log('filtered resources')
+  console.log(resources)
   const resource = findMaxCPUUsageResource(resources);
+  console.log('max cpu usage resource')
+  console.log(resource)
   const node = findNode(nodes, resource);
+  console.log('find node')
+  console.log(node)
   const pods = getResourcesFromNode(node, allResources);
+  console.log('resources from node')
+  console.log(pods)
   const available = getAvailableCPU(node, resource, pods);
+  console.log('available')
+  console.log(available)
 
   return {
     capacity: ensureValue(_ => available, 0),
@@ -88,18 +94,14 @@ export const findMaxMemoryUsageResource = resources => {
 
   if (!resources || resources.length <= 0) return maxUsageResource;
 
-  resources.reduce((x, y) => {
-    const xUsage = x.usage || { memory: 0 };
-    const yUsage = y.usage || { memory: 0 };
-
-    if (xUsage.cpu > yUsage.cpu) {
-      maxUsageResource = x;
-      return x;
+  resources.forEach(element => {
+    if (!maxUsageResource) {
+      maxUsageResource = element;
+    } else if (element.usage && maxUsageResource.usage.memory < element.usage.memory) {
+      maxUsageResource = element;
     }
+  });
 
-    maxUsageResource = y;
-    return y;
-  })
   return maxUsageResource;
 }
 

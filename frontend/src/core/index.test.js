@@ -44,6 +44,14 @@ it('Get resource with max CPU usage', function () {
   expect(resource.meta.name).toBe('resource2');
 })
 
+it('Get resource with max CPU usage when only one resource passed', function () {
+  const resources = [
+    createResourceWithCPUUsage('resource1', 0),
+  ];
+  const resource = findMaxCPUUsageResource(resources);
+  expect(resource.meta.name).toBe('resource1');
+})
+
 
 it('Get some resource with no usage', function () {
   const resources = [
@@ -53,7 +61,7 @@ it('Get some resource with no usage', function () {
     createEmptyResource('resource4')
   ];
   const resource = findMaxCPUUsageResource(resources);
-  expect(resource.meta.name).toBe('resource4');
+  expect(resource.meta.name).toBe('resource1');
 })
 
 it('Get node from nodes and resource', function () {
