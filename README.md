@@ -5,7 +5,7 @@
 
 Kubex is a simple and lightweight dashboard to monitor kubernetes cluster state and resources. 
 
-![alt text](images/dashboard-service.png "Description goes here")
+<img src="images/dashboard-service.png" alt="alt text" width="80%" height="auto">
 
 ### Installation
 
