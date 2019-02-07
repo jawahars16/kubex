@@ -9,7 +9,7 @@ Kubex is a simple and lightweight dashboard to monitor kubernetes cluster state 
 
 ### Installation
 
-Installation is simple, but it needs go.
+Install via go get command.
 
 ```
 go get -u github.com/jawahars16/kubex
