@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Kubex",
+  "name": "Simple and lightweight dashboard to monitor kubernetes cluster state and resources.",
   "icons": [
     {
       "src": "favicon.ico",
