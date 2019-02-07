@@ -43,6 +43,10 @@ kubectl config set-context NAME [--cluster=cluster_nickname] [--user=user_nickna
 
 [Read here for more details about setting a context entry](http://jamesdefabia.github.io/docs/user-guide/kubectl/kubectl_config_set-context/)
 
+Kubex read matrics data from cluster using metrics-server. If no metrics-server installed in cluster, kubex cannot show metrics information. Other visualization still works.
+
+[Read here for more details about installing metrics-server in kubernetes cluster](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/metrics-server)
+
 ## Built With
 
 * [React](https://reactjs.org/) - Building user interfaces
