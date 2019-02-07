@@ -47,13 +47,13 @@ Kubex read matrics data from cluster using metrics-server. If no metrics-server 
 
 [Read here for more details about installing metrics-server in kubernetes cluster](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/metrics-server)
 
-## Built With
+### Built With
 
 * [React](https://reactjs.org/) - Building user interfaces
 * [godep](https://github.com/tools/godep) - Dependency toolt for go
 * [client-go](https://github.com/kubernetes/client-go) - Used to fetch data from kubernetes cluster
 * [Ant design](https://ant.design/) - UI Design library for react
 
-## License
+### License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
